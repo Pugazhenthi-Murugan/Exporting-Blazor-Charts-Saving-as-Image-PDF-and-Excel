@@ -1,15 +1,11 @@
-using BlazorApp11.Components;
+using ExportChart.Components;
 using Syncfusion.Blazor;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-builder.Services.AddSyncfusionBlazor(); // Register Syncfusion Blazor services
-builder.Services.AddServerSideBlazor().AddHubOptions(o =>
-{
-    o.MaximumReceiveMessageSize = 102400000;
-}); // Increase the maximum message size
+builder.Services.AddSyncfusionBlazor();
 
 var app = builder.Build();
 
@@ -23,10 +19,9 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-
+app.UseStaticFiles();
 app.UseAntiforgery();
 
-app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 

@@ -4,25 +4,28 @@
 
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px;">
     <div class="control-section col-lg-9 sb-property-border" style="flex-grow: 1;">
-        <SfChart @ref="@ChartInstance" Title="Top 10 Countries Using Solar Power">
+        <SfChart @ref="@ChartInstance" Title="Top 10 Countries Using Solar Power" UseGroupingSeparator="true">
+            <ChartEvents OnExportComplete="ExportComplete"></ChartEvents>
             <ChartTitleStyle TextOverflow="TextOverflow.Wrap"></ChartTitleStyle>
+            <ChartTooltipSettings Enable="true" Format="${point.x}: ${point.y}"></ChartTooltipSettings>
             <ChartArea><ChartAreaBorder Width="0"></ChartAreaBorder></ChartArea>
             <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category" Interval="1" LabelIntersectAction="LabelIntersectAction.Trim" LabelRotation="-45">
                 <ChartAxisMajorGridLines Width="0"></ChartAxisMajorGridLines>
                 <ChartAxisMajorTickLines Width="0"></ChartAxisMajorTickLines>
             </ChartPrimaryXAxis>
-            <ChartPrimaryYAxis Minimum="0" Maximum="40" Interval="10" Title="Measurements (in Gigawatt)" LabelFormat="{value}GW">
-                <ChartAxisMajorGridLines Width="0"></ChartAxisMajorGridLines>
-                <ChartAxisLineStyle Width="0"></ChartAxisLineStyle>
-                <ChartAxisMajorGridLines Width="2"></ChartAxisMajorGridLines>
-                <ChartAxisMajorTickLines Width="0"></ChartAxisMajorTickLines>
+            <ChartPrimaryYAxis 
+                               Title="Measurements (in Megawatt)"
+                               LabelFormat="{value} MW">
+                <ChartAxisLineStyle Width="0" />
+                <ChartAxisMajorGridLines Width="2" />
+                <ChartAxisMajorTickLines Width="0" />
             </ChartPrimaryYAxis>
             <ChartSeriesCollection>
-                <ChartSeries DataSource="@ChartPoints" XName="Country" YName="GigaWatts" Type="ChartSeriesType.Column" PointColorMapping="Color">
+                <ChartSeries DataSource="@ChartPoints" XName="Country" YName="MegaWatt" Type="ChartSeriesType.Column" PointColorMapping="Color">
                     <ChartCornerRadius TopLeft="4" TopRight="4"></ChartCornerRadius>
                     <ChartMarker>
-                        <ChartDataLabel Visible="true" Name=" DataLabelMappingName" Position="Syncfusion.Blazor.Charts.LabelPosition.Top">
-                            <ChartDataLabelFont FontWeight="600" Size="9px" Color="#ffffff"></ChartDataLabelFont>
+                        <ChartDataLabel Visible="true" Name=" DataLabelMappingName" Position="Syncfusion.Blazor.Charts.LabelPosition.Outer">
+                            <ChartDataLabelFont FontWeight="600" Size="9px" Color="black"></ChartDataLabelFont>
                         </ChartDataLabel>
                     </ChartMarker>
                 </ChartSeries>
@@ -51,17 +54,18 @@
     private SfChart? ChartInstance;
     public List<ExportData> ChartPoints { get; set; } = new List<ExportData>
     {
-        new ExportData {Country="India", GigaWatts = 35.5, DataLabelMappingName="35.5", Color="#FFD700"},
-        new ExportData {Country="China", GigaWatts = 18.3, DataLabelMappingName="18.3", Color="#FFA500"},
-        new ExportData {Country="Italy", GigaWatts = 17.6, DataLabelMappingName="17.6", Color="#FF6347"},
-        new ExportData {Country="Japan", GigaWatts = 13.6, DataLabelMappingName="13.6", Color="#FF4500"},
-        new ExportData {Country="United State", GigaWatts = 12, DataLabelMappingName="12", Color="#FF0000"},
-        new ExportData {Country="Spain", GigaWatts = 5.6, DataLabelMappingName="5.6", Color="#DC143C"},
-        new ExportData {Country="France", GigaWatts = 4.6, DataLabelMappingName="4.6", Color="#B22222"},
-        new ExportData {Country="Australia", GigaWatts = 3.3, DataLabelMappingName="3.3", Color="#8B0000"},
-        new ExportData {Country="Belgium", GigaWatts = 3, DataLabelMappingName="3", Color="#800000"},
-        new ExportData {Country="United Kingdom", GigaWatts = 2.9, DataLabelMappingName="2.9", Color="#A52A2A"},
+        new ExportData { Country = "China", MegaWatt = 887929.8, DataLabelMappingName = "887,929.8 MW", Color = "#FFD700" },
+        new ExportData { Country = "USA", MegaWatt = 177470.3, DataLabelMappingName = "177,470.3 MW", Color = "#FFA500" },
+        new ExportData { Country = "India", MegaWatt = 97384.0, DataLabelMappingName = "97,384.0 MW", Color = "#FF6347" },
+        new ExportData { Country = "Japan", MegaWatt = 91610.3, DataLabelMappingName = "91,610.3 MW", Color = "#FF4500" },
+        new ExportData { Country = "Germany", MegaWatt = 89943.0, DataLabelMappingName = "89,943.0 MW", Color = "#FF0000" },
+        new ExportData { Country = "Brazil", MegaWatt = 53113.1, DataLabelMappingName = "53,113.1 MW", Color = "#DC143C" },
+        new ExportData { Country = "Spain", MegaWatt = 38587.4, DataLabelMappingName = "38,587.4 MW", Color = "#B22222" },
+        new ExportData { Country = "Australia", MegaWatt = 38472.0, DataLabelMappingName = "38,472.0 MW", Color = "#8B0000" },
+        new ExportData { Country = "Italy", MegaWatt = 36013.1, DataLabelMappingName = "36,013.1 MW", Color = "#800000" },
+        new ExportData { Country = "Republic of Korea", MegaWatt = 26645.1, DataLabelMappingName = "26,645.1 MW", Color = "#A52A2A" },
     };
+
     private async Task ExportAsImage()
     {
         if (ChartInstance != null)
@@ -73,9 +77,15 @@
     {
         if (ChartInstance != null)
         {
-            await ChartInstance.ExportAsync(ExportType.PDF, "ChartReport");
+            await ChartInstance.ExportAsync(ExportType.PDF, "ChartReport", Syncfusion.PdfExport.PdfPageOrientation.Landscape, false, true);
         }
     }
+
+    public void ExportComplete(ExportEventArgs exportEventArgs)
+    {
+        string base64 = exportEventArgs.Base64;
+    }
+
     private async Task ExportAsExcel()
     {
         if (ChartInstance != null)
@@ -86,7 +96,7 @@
     public class ExportData
     {
         public string Country { get; set; }
-        public double GigaWatts { get; set; }
+        public double MegaWatt { get; set; }
         public string DataLabelMappingName { get; set; }
         public string Color { get; set; }
     }
