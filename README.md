@@ -1,6 +1,6 @@
 # Blazor Chart Export
 
-Export interactive charts in multiple formats - PNG, PDF, and Excel - directly from your Blazor web application.
+Export interactive [Blazor Charts](https://www.syncfusion.com/blazor-components/blazor-charts) in multiple formats - PNG, PDF, and Excel - directly from your Blazor web application.
 
 ## Overview
 
@@ -62,20 +62,6 @@ Each export type is optimized for its respective format:
 - **PDF**   - Reports & Documents 
 - **Excel** - Data Analysis 
 
-## Technology Stack
-
-- **.NET 8** - Latest .NET framework
-- **Blazor Server** - Interactive web UI framework
-- **C#** - Primary programming language
-- **Bootstrap 5** - Responsive UI framework
-- **Syncfusion Components** - Professional charts and export functionality
-
-### Browser Support
-
-- Chrome/Edge (latest)
-- Firefox (latest)
-- Safari (latest)
-
 ## Export Customization
 
 The chart export functionality can be customized by modifying:
@@ -86,7 +72,5 @@ The chart export functionality can be customized by modifying:
 - **Data source** - Modify the chart data collection for different datasets
 
 ## References
-
-- [Blazor Documentation](https://docs.microsoft.com/aspnet/core/blazor/)
-- [.NET 8 Release Notes](https://docs.microsoft.com/dotnet/core/whats-new/dotnet-8)
-- [Bootstrap Documentation](https://getbootstrap.com/docs/)
+- Chart Export Documentation: https://blazor.syncfusion.com/documentation/chart/chart-print
+- Blazor Chart Export Demo: https://blazor.syncfusion.com/demos/chart/export/
