@@ -1,6 +1,6 @@
-# Blazor Chart Export
+# Blazor Chart Export with Multi-Format Export Support
 
-Export interactive [Blazor Charts](https://www.syncfusion.com/blazor-components/blazor-charts) in multiple formats - PNG, PDF, and Excel - directly from your Blazor web application.
+Export interactive [Blazor Charts](https://www.syncfusion.com/blazor-components/blazor-charts) in multiple formats—PNG images, PDF documents, and Excel spreadsheets—directly from your Blazor web application with production-ready code and best practices.
 
 ## Overview
 
@@ -45,31 +45,6 @@ dotnet restore
 # Run the project
 dotnet run
 ```
-
-## Usage
-
-### Exporting Charts
-
-The application provides three export options accessible via simple button clicks:
-
-- **Export as Image** - Download chart as PNG format
-- **Export as PDF** - Generate landscape-oriented PDF report
-- **Export as Excel** - Export chart data to XLSX spreadsheet
-
-Each export type is optimized for its respective format:
-
-- **PNG**   - Presentations & Web 
-- **PDF**   - Reports & Documents 
-- **Excel** - Data Analysis 
-
-## Export Customization
-
-The chart export functionality can be customized by modifying:
-
-- **Export filename** - Change the filename parameter in export calls
-- **PDF orientation** - Toggle between landscape and portrait modes
-- **Chart styling** - Customize colors, fonts, and layout before export
-- **Data source** - Modify the chart data collection for different datasets
 
 ## References
 - Chart Export Documentation: https://blazor.syncfusion.com/documentation/chart/chart-print
